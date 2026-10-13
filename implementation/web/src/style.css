@@ -156,7 +156,7 @@ a { color: inherit; text-decoration: none; }
 .welcome-banner p { margin: 4px 0 0; color: var(--muted); font-size: 12px; }
 .team-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
 .team-card { display: flex; flex-direction: column; min-height: 202px; padding: 18px; border: 1px solid #d1d9e0; border-radius: 6px; background: #ffffff; transition: border-color .15s, box-shadow .15s, transform .15s; }
-.team-card:hover { transform: translateY(-2px); border-color: #d1d9e0; box-shadow: 0 9px 22px rgba(35, 72, 46, .06); }
+.team-card:hover { transform: translateY(-2px); border-color: var(--subtle); box-shadow: 0 9px 22px rgba(35, 72, 46, .06); }
 .team-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 13px; }
 .team-symbol, .mini-team-symbol { display: grid; place-items: center; width: 35px; height: 35px; border-radius: 6px; font-size: 15px; font-weight: 700; }
 .team-symbol-0 { background: #d1d9e0; color: #0969da; }
@@ -197,7 +197,7 @@ a { color: inherit; text-decoration: none; }
 .dashboard-grid .repo-list, .membership-list { overflow: hidden; background: #ffffff; border: 1px solid var(--line); border-radius: 6px; }
 .repo-row { display: flex; align-items: center; gap: 14px; min-height: 91px; padding: 16px 17px; border-bottom: 1px solid #d8dee4; transition: background .15s; }
 .repo-row:last-child { border-bottom: 0; }
-.repo-row:hover { background: #ffffff; }
+.repo-row:hover { background: var(--bg-subtle); }
 .repo-row-icon { display: grid; place-items: center; width: 37px; height: 37px; flex: 0 0 37px; border-radius: 6px; color: #59636e; background: #f6f8fa; }
 .repo-row-main { min-width: 0; flex: 1; }
 .repo-row-title { display: flex; align-items: center; gap: 9px; min-width: 0; }
@@ -298,7 +298,7 @@ a { color: inherit; text-decoration: none; }
 .copy-label { padding-left: 10px; color: #59636e; font-size: 9px; font-weight: 700; white-space: nowrap; }
 .copy-field input { flex: 1; min-width: 0; height: 100%; padding: 0 11px; border: 0; outline: 0; background: transparent; color: #1f2328; font-size: 10px; font-family: "DM Mono", monospace; }
 .copy-field button { display: grid; place-items: center; width: 38px; height: 100%; flex: 0 0 38px; border: 0; border-left: 1px solid #d1d9e0; background: #f6f8fa; color: #59636e; }
-.copy-field button:hover { background: #f6f8fa; }
+.copy-field button:hover { background: var(--line-muted); color: var(--ink); }
 .clone-panel .info-box { margin: 0 21px; }
 /* Archive downloads sit with the clone address: both are ways to take the code
    away, so they belong in the same panel rather than a separate one. */
@@ -328,7 +328,7 @@ a { color: inherit; text-decoration: none; }
 .about-fact strong { color: #1f2328; font-size: 10px; }
 .token-panel { overflow: hidden; background: #ffffff; border: 1px solid var(--line); border-radius: 6px; }
 .token-panel-trigger { display: flex; align-items: center; gap: 10px; width: 100%; padding: 15px; border: 0; background: #ffffff; text-align: left; }
-.token-panel-trigger:hover { background: #ffffff; }
+.token-panel-trigger:hover { background: var(--bg-subtle); }
 .token-panel-icon { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 6px; color: #59636e; background: #f6f8fa; }
 .token-panel-trigger > span:nth-child(2) { min-width: 0; flex: 1; }
 .token-panel-trigger strong, .token-panel-trigger small { display: block; }
@@ -398,5 +398,5 @@ a { color: inherit; text-decoration: none; }
 .dialog .field-label:not(:first-child) { margin-top: 15px; }.dialog .button { margin-top: 19px; }.dialog .error-message { margin-top: 15px; }
 
 @media (max-width: 1100px) { .content { padding: 35px 29px 70px; }.team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }.admin-grid { grid-template-columns: minmax(0, 1fr); }.admin-create { max-width: none; }.managed-team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 850px) { content { padding: 31px 22px 65px; }.dashboard-grid, .repo-detail-grid, .tokens-grid { grid-template-columns: 1fr; }.hero-art { margin-right: 0; }.side-panel { max-width: none; }.form-layout { grid-template-columns: 1fr; }.form-aside { display: none; }.login-side { padding: 35px 30px; }.login-statement h1 { font-size: 50px; } }
+@media (max-width: 850px) { .content { padding: 31px 22px 65px; }.dashboard-grid, .repo-detail-grid, .tokens-grid { grid-template-columns: 1fr; }.hero-art { margin-right: 0; }.side-panel { max-width: none; }.form-layout { grid-template-columns: 1fr; }.form-aside { display: none; }.login-side { padding: 35px 30px; }.login-statement h1 { font-size: 50px; } }
 @media (max-width: 650px) { .content { padding: 27px 16px 60px; }.page-heading { align-items: flex-start; margin-bottom: 25px; }.page-heading h1 { font-size: 26px; }.page-heading p { font-size: 11px; }.page-action .button { padding: 0 11px; font-size: 10px; }.team-grid, .managed-team-grid { grid-template-columns: 1fr; }.welcome-banner { padding: 22px 18px; gap: 13px; }.welcome-icon { width: 43px; height: 43px; flex-basis: 43px; }.welcome-banner h2 { font-size: 15px; }.welcome-banner p { font-size: 10px; }.dashboard-hero { min-height: 190px; padding: 25px; }.dashboard-hero h2 { font-size: 19px; }.hero-art { display: none; }.admin-summary { grid-template-columns: 1fr 1fr; }.admin-summary .summary-note { grid-column: 1 / -1; min-height: 62px; }.admin-summary > div { padding: 15px; }.form-section { padding: 22px 18px; }.field-grid { grid-template-columns: 1fr; }.form-actions { padding: 16px 18px; }.review-row { flex-wrap: wrap; }.review-actions { width: 100%; justify-content: flex-end; padding-left: 45px; }.login-page { display: block; }.login-side { display: none; }.login-form-side { min-height: 100vh; padding: 28px; }.login-mobile-logo { display: block; margin-bottom: 60px; } }

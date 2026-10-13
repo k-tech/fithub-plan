@@ -1,0 +1,24 @@
+.collab-page { max-width: 880px; }
+.collab-back { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 19px; color: #59636e; font-size: 12px; font-weight: 700; }
+.collab-add-panel, .collab-list-panel { margin-bottom: 18px; padding: 20px; }
+.collab-panel-title { display: flex; align-items: center; gap: 8px; color: #59636e; }
+.collab-panel-title h2 { margin: 0; color: #59636e; font-size: 14px; }
+.collab-add-panel > p, .collab-footnote { color: #6e7781; font-size: 11px; line-height: 1.6; }
+.collab-add-panel form { display: grid; grid-template-columns: minmax(0, 1fr) 150px auto; align-items: end; gap: 10px; margin-top: 18px; }
+.collab-add-panel label { display: grid; gap: 7px; color: #59636e; font-size: 11px; font-weight: 700; }
+
+.collab-add-panel .button { min-height: 39px; }
+.collab-row { display: flex; align-items: center; gap: 12px; min-height: 60px; border-bottom: 1px solid #d8dee4; }
+.collab-row:last-of-type { border-bottom: 0; }
+.collab-avatar { display: grid; flex: 0 0 30px; place-items: center; width: 30px; height: 30px; border-radius: 50%; color: #ffffff; background: #59636e; font-size: 11px; font-weight: 700; }
+.collab-person { min-width: 0; flex: 1; }
+.collab-person strong, .collab-person small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.collab-person strong { color: #59636e; font-size: 11px; }
+.collab-person small { margin-top: 4px; color: #6e7781; font-size: 10px; }
+.collab-role { color: #59636e; font-size: 10px; font-weight: 700; }
+.collab-creator { color: #6e7781; font-size: 10px; }
+.collab-remove { display: grid; place-items: center; width: 27px; height: 27px; border: 0; border-radius: 6px; color: #cf222e; background: transparent; cursor: pointer; }
+.collab-remove:hover { color: #cf222e; background: #fff0ee; }
+.collab-footnote { margin: 14px 0 0; }
+.collab-error { display: flex; align-items: center; gap: 8px; margin: 12px 0; padding: 11px 13px; border-radius: 6px; color: #cf222e; background: #ffebe9; font-size: 11px; }
+@media (max-width: 680px) { .collab-add-panel form { grid-template-columns: 1fr; }.collab-row { gap: 8px; }.collab-person { max-width: 43%; } }

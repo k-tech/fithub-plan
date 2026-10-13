@@ -1,0 +1,55 @@
+.browse-page { display: grid; gap: 0; }
+.browse-panel { overflow: hidden; min-height: 180px; }
+.browse-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 54px; padding: 0 18px; border-bottom: 1px solid #d1d9e0; background: #ffffff; }
+.browse-breadcrumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; min-width: 0; color: #59636e; font-size: 13px; }
+.browse-breadcrumbs > a { color: #59636e; font-weight: 650; }
+.browse-crumb { display: inline-flex; align-items: center; gap: 5px; min-width: 0; }
+.browse-crumb svg { flex: none; color: #6e7781; }
+.browse-crumb a, .browse-crumb strong { overflow: hidden; color: #59636e; text-overflow: ellipsis; white-space: nowrap; }
+.browse-crumb strong { color: #59636e; font-weight: 650; }
+.browse-tree-sha, .browse-file-meta { flex: none; color: #6e7781; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; }
+/* The toolbar holds breadcrumbs on the left and the metadata plus download on
+   the right, grouped so the two right-hand items stay together. */
+.browse-toolbar-actions { display: flex; flex: none; align-items: center; gap: 12px; }
+.browse-entry { display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 0 18px; border-bottom: 1px solid #d1d9e0; color: #59636e; text-decoration: none; transition: background .15s; }
+.browse-entry:last-of-type { border-bottom: 0; }
+.browse-entry:hover { background: #f6f8fa; }
+.browse-entry-icon { display: grid; flex: none; width: 22px; place-items: center; color: #59636e; }
+.browse-entry-name { overflow: hidden; flex: 0 1 38%; min-width: 0; color: #59636e; font-size: 13px; text-overflow: ellipsis; white-space: nowrap; }
+/* The last change sits in its own column, as on the reference products: it is
+   what tells a maintained file from an abandoned one at a glance. */
+.browse-entry-commit { overflow: hidden; flex: 1 1 auto; min-width: 0; text-align: right; }
+.browse-entry-commit > span { display: block; overflow: hidden; color: #6e7781; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+.browse-entry-commit > small { display: block; overflow: hidden; margin-top: 2px; color: #8b949e; font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+.browse-entry-type { flex: none; color: #6e7781; font-size: 11px; }
+.browse-entry-type.symlink, .browse-entry-disabled .browse-entry-icon { color: #bd8647; }
+.browse-entry-chevron { flex: none; color: #6e7781; }
+.browse-entry-disabled { cursor: default; background: #fffefa; }
+.browse-parent { background: #ffffff; }
+.browse-directory-empty { padding: 28px 18px; color: #59636e; font-size: 13px; text-align: center; }
+.browse-truncated { padding: 12px 18px; border-top: 1px solid #d1d9e0; background: #ffffff; color: #59636e; font-size: 12px; }
+.browse-code { overflow: auto; max-height: min(72vh, 860px); margin: 0; padding: 20px 22px; background: #ffffff; color: #59636e; font: 12.5px/1.75 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; tab-size: 4; white-space: pre; }
+.browse-message { display: flex; align-items: flex-start; gap: 12px; padding: 25px 20px; color: #a16a27; }
+.browse-message div, .browse-error > div { display: grid; gap: 5px; }
+.browse-message strong, .browse-error strong { color: #59636e; font-size: 13px; }
+.browse-message span, .browse-error span { color: #59636e; font-size: 12px; line-height: 1.5; }
+.browse-error { display: flex; align-items: center; gap: 13px; padding: 18px; color: #b05e54; }
+.browse-error > div { flex: 1; }
+.browse-error .button { display: inline-flex; align-items: center; gap: 6px; }
+.browse-empty { display: grid; justify-items: center; gap: 9px; padding: 44px 20px; color: #59636e; text-align: center; }
+.browse-empty h2 { margin: 0; color: #59636e; font-size: 17px; }
+.browse-empty p { margin: 0 0 8px; color: #59636e; font-size: 13px; }
+@media (max-width: 680px) {
+  .browse-toolbar { align-items: flex-start; flex-direction: column; justify-content: center; gap: 5px; padding: 10px 14px; }
+  .browse-entry { padding: 0 13px; }
+  .browse-entry-type { display: none; }
+  /* The commit column is the first thing to drop: on a narrow screen the file
+     names are what matters. */
+  .browse-entry-commit { display: none; }
+  .browse-entry-name { flex: 1; }
+  .browse-code { padding: 16px; font-size: 11.5px; }
+}
+
+/* Link to the full branch and tag listing, next to the ref picker. */
+.ref-all-link { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 13px; }
+.ref-all-link:hover { color: var(--ink); }

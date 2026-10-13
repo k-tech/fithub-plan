@@ -1,0 +1,8 @@
+.env
+.env.*
+!.env.example
+web/node_modules/
+web/dist/
+web/*.tsbuildinfo
+data/
+*.log

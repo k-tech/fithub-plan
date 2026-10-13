@@ -1,0 +1,42 @@
+.commit-list-panel { margin-bottom: 30px; }
+.commit-row { display: flex; align-items: center; gap: 13px; padding: 15px 19px; border-bottom: 1px solid #f6f8fa; }
+.commit-row:last-child { border-bottom: 0; }
+.commit-row:hover { background: #ffffff; }
+.commit-row-icon { display: grid; place-items: center; flex: 0 0 31px; width: 31px; height: 31px; border-radius: 6px; color: #59636e; background: #f6f8fa; }
+.commit-row-copy { min-width: 0; flex: 1; }
+.commit-row-copy strong { display: block; overflow: hidden; color: #1f2328; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+.commit-row-copy small { display: block; margin-top: 5px; color: #6e7781; font-size: 10px; }
+.commit-row code { color: #59636e; background: #f6f8fa; padding: 5px 7px; border-radius: 5px; font-size: 10px; }
+.commit-chevron { color: #6e7781; }
+.commit-empty { padding: 55px 20px; color: #6e7781; text-align: center; }
+.commit-empty h3 { margin: 12px 0 0; color: #1f2328; font-size: 15px; }
+.commit-empty p { margin: 7px 0 0; font-size: 11px; }
+.commit-pagination { display: flex; justify-content: center; align-items: center; gap: 16px; padding: 15px; color: #6e7781; font-size: 11px; border-top: 1px solid #d8dee4; }
+.commit-back { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 18px; color: #59636e; font-size: 11px; font-weight: 700; }
+.commit-detail-panel { margin-bottom: 22px; }
+.commit-detail-top { display: flex; gap: 13px; padding: 20px; }
+.commit-detail-symbol { display: grid; place-items: center; flex: 0 0 39px; width: 39px; height: 39px; border-radius: 6px; color: #59636e; background: #f6f8fa; }
+.commit-detail-top h2 { margin: 0; color: #59636e; font-size: 16px; }
+.commit-detail-top p { margin: 7px 0 0; color: #6e7781; font-size: 10px; }
+.commit-detail-top p strong { color: #59636e; }
+.commit-message { padding: 0 21px 20px 72px; white-space: pre-wrap; overflow-wrap: anywhere; color: #59636e; font-size: 11px; line-height: 1.7; }
+.commit-meta { display: flex; gap: 18px; padding: 12px 20px; border-top: 1px solid #d8dee4; font-size: 10px; }
+.commit-meta span { flex: 0 0 65px; color: #6e7781; }
+.commit-meta code { min-width: 0; overflow-wrap: anywhere; color: #59636e; }
+.commit-change-heading { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 13px; }
+.commit-change-heading h2 { margin: 0; color: #59636e; font-size: 15px; }
+.commit-change-heading p, .commit-change-heading > span { margin: 5px 0 0; color: #6e7781; font-size: 10px; }
+.commit-change-heading > span { display: flex; gap: 5px; align-items: center; }
+.commit-change-heading .added, .commit-file-count b { color: #59636e; font-style: normal; }
+.commit-change-heading .deleted, .commit-file-count em { color: #c66d61; font-style: normal; }
+.commit-file-row { display: flex; align-items: center; gap: 11px; padding: 13px 17px; border-bottom: 1px solid #f6f8fa; color: #6e7781; }
+.commit-file-row:last-child { border-bottom: 0; }
+.commit-file-status { flex: 0 0 41px; text-align: center; padding: 3px 4px; border-radius: 5px; color: #856f4c; background: #f8f1e5; font-size: 9px; font-weight: 700; }
+.commit-file-status.added { color: #59636e; background: #d1d9e0; }.commit-file-status.deleted { color: #b95e54; background: #fbeeea; }
+.commit-file-row > div { min-width: 0; flex: 1; }
+.commit-file-row strong { display: block; overflow-wrap: anywhere; color: #59636e; font-size: 11px; font-weight: 600; }
+.commit-file-row small { display: block; margin-top: 3px; color: #6e7781; font-size: 9px; }
+.commit-file-count { white-space: nowrap; color: #6e7781; font-size: 10px; }
+.commit-info, .commit-error { display: flex; gap: 8px; align-items: center; margin: 12px 0; padding: 13px 15px; border: 1px solid #f6f8fa; border-radius: 6px; background: #ffffff; color: #59636e; font-size: 11px; }
+.commit-error { color: #cf222e; border-color: #ffebe9; background: #ffebe9; }
+@media (max-width: 650px) { .commit-header-title h1 { font-size: 22px; }.commit-toolbar p { display: none; }.commit-row { padding: 13px; }.commit-row code { display: none; }.commit-meta { gap: 8px; }.commit-nav { overflow-x: auto; } }

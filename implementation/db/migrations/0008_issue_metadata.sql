@@ -1,0 +1,1 @@
+../../internal/store/migrations/0008_issue_metadata.sql

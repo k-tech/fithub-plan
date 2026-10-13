@@ -1,0 +1,165 @@
+/* Styling for the Radix-based primitives in ui.tsx.
+   Radix provides behaviour only; every visual decision lives here, which is what
+   keeps the look consistent with the rest of the product. */
+
+/* Motion here is deliberately small and short (110-170ms): enough to show where
+   a surface came from, not enough to wait for.
+   Two rules hold for this whole file. Popper layers (menu, select, tooltip) are
+   animated with the independent `scale` and `translate` properties rather than
+   `transform`, because Radix positions them with an inline transform — animating
+   `transform` would overwrite that and the layer would jump. And every animation
+   is switched off under prefers-reduced-motion, at the end of the file. */
+
+/* --- overlay and dialog --------------------------------------------------- */
+
+.ui-overlay { position: fixed; inset: 0; z-index: 60; background: rgba(31, 35, 40, .5); }
+.ui-overlay[data-state='open'] { animation: ui-fade-in .15s ease-out; }
+.ui-overlay[data-state='closed'] { animation: ui-fade-out .12s ease-in forwards; }
+.ui-dialog { position: fixed; z-index: 61; top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(100% - 32px, 440px); max-height: calc(100vh - 64px); overflow: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg); box-shadow: 0 8px 24px rgba(140, 149, 159, .3); }
+.ui-dialog[data-state='open'] { animation: ui-dialog-in .16s cubic-bezier(.16, 1, .3, 1); }
+.ui-dialog[data-state='closed'] { animation: ui-dialog-out .12s ease-in forwards; }
+.ui-dialog-head { padding: 16px 48px 0 16px; }
+.ui-dialog-title { margin: 0; color: var(--ink); font-size: 16px; font-weight: 600; }
+.ui-dialog-description { margin: 8px 0 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.ui-dialog-body { padding: 16px; }
+.ui-dialog-body:empty { display: none; }
+.ui-dialog-footer { display: flex; justify-content: flex-end; gap: 8px; padding: 0 16px 16px; }
+.ui-dialog-close { position: absolute; top: 12px; right: 12px; display: grid; place-items: center; width: 28px; height: 28px; border: 0; border-radius: var(--radius); color: var(--muted); background: transparent; }
+.ui-dialog-close:hover { background: var(--bg-subtle); color: var(--ink); }
+
+@keyframes ui-fade-in { from { opacity: 0 } to { opacity: 1 } }
+@keyframes ui-fade-out { from { opacity: 1 } to { opacity: 0 } }
+/* The dialog is centred by its own transform, so it is free to animate it. */
+@keyframes ui-dialog-in { from { opacity: 0; transform: translate(-50%, -47%) scale(.97) } to { opacity: 1; transform: translate(-50%, -50%) scale(1) } }
+@keyframes ui-dialog-out { from { opacity: 1; transform: translate(-50%, -50%) scale(1) } to { opacity: 0; transform: translate(-50%, -49%) scale(.985) } }
+
+/* Entrance and exit for the popper layers. Origin and starting offset follow
+   Radix's data-side, so a menu below its trigger rises into place and one above
+   it drops into place. */
+.ui-menu, .ui-select-content, .ui-tooltip { animation-duration: .14s; animation-timing-function: cubic-bezier(.16, 1, .3, 1); }
+.ui-menu[data-side='bottom'], .ui-select-content[data-side='bottom'], .ui-tooltip[data-side='bottom'] { transform-origin: top; --ui-pop-shift: -3px }
+.ui-menu[data-side='top'], .ui-select-content[data-side='top'], .ui-tooltip[data-side='top'] { transform-origin: bottom; --ui-pop-shift: 3px }
+.ui-menu[data-side='right'], .ui-select-content[data-side='right'], .ui-tooltip[data-side='right'] { transform-origin: left; --ui-pop-shift-x: -3px }
+.ui-menu[data-side='left'], .ui-select-content[data-side='left'], .ui-tooltip[data-side='left'] { transform-origin: right; --ui-pop-shift-x: 3px }
+.ui-menu[data-state='open'], .ui-select-content[data-state='open'], .ui-tooltip[data-state='open'] { animation-name: ui-pop-in }
+.ui-menu[data-state='closed'], .ui-select-content[data-state='closed'], .ui-tooltip[data-state='closed'] { animation-name: ui-pop-out; animation-duration: .1s; animation-timing-function: ease-in; animation-fill-mode: forwards }
+@keyframes ui-pop-in {
+  from { opacity: 0; scale: .96; translate: var(--ui-pop-shift-x, 0) var(--ui-pop-shift, 0) }
+  to { opacity: 1; scale: 1; translate: 0 0 }
+}
+@keyframes ui-pop-out {
+  from { opacity: 1; scale: 1 }
+  to { opacity: 0; scale: .97 }
+}
+
+/* --- dropdown menu -------------------------------------------------------- */
+
+.ui-menu-trigger { display: inline-flex; align-items: center; background: none; border: 0; color: inherit; font: inherit; cursor: pointer; }
+.ui-menu { z-index: 62; min-width: 200px; padding: 4px 0; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg); box-shadow: 0 8px 24px rgba(140, 149, 159, .2); }
+.ui-menu-label { display: block; padding: 6px 12px 4px; color: var(--muted); font-size: 12px; font-weight: 600; }
+.ui-menu-item { display: flex; align-items: center; gap: 8px; padding: 6px 12px; color: var(--ink); font-size: 13px; outline: 0; cursor: pointer; }
+/* Radix marks the highlighted item with data-highlighted, so keyboard and
+   pointer navigation share one visual state. */
+.ui-menu-item[data-highlighted] { background: var(--bg-subtle); }
+.ui-menu-item[data-disabled] { color: var(--subtle); cursor: not-allowed; }
+.ui-menu-item svg { color: var(--subtle); flex: 0 0 auto; }
+.ui-menu-separator { height: 1px; margin: 4px 0; background: var(--line); }
+
+/* --- tooltip -------------------------------------------------------------- */
+
+.ui-tooltip { z-index: 70; max-width: 260px; padding: 4px 8px; border-radius: var(--radius); background: var(--ink); color: #fff; font-size: 12px; line-height: 1.5; }
+.ui-tooltip-arrow { fill: var(--ink); }
+/* --- select --------------------------------------------------------------- */
+
+.ui-select-trigger { display: inline-flex; align-items: center; justify-content: space-between; gap: 6px; min-width: 120px; height: 32px; padding: 0 8px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-subtle); color: var(--ink); font-size: 13px; }
+.ui-select-trigger:hover { border-color: var(--subtle); }
+.ui-select-trigger:focus-visible { outline: 0; border-color: var(--link); box-shadow: 0 0 0 3px rgba(9, 105, 218, .3); }
+.ui-select-trigger[data-placeholder] { color: var(--subtle); }
+/* Radix renders the selected value as a bare span and drops any className put on
+   it, so the value is targeted by structure: the chevron wrapper is the only
+   aria-hidden span. Without flex:1 the value shrinks to its text and the
+   chevron sits next to it instead of at the far edge. */
+.ui-select-trigger > span:not([aria-hidden]) { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: left; }
+.ui-select-trigger svg { color: var(--subtle); flex: 0 0 auto; }
+.ui-select-content { z-index: 62; max-height: 320px; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg); box-shadow: 0 8px 24px rgba(140, 149, 159, .2); }
+.ui-select-search { display: flex; align-items: center; gap: 6px; padding: 7px 10px; border-bottom: 1px solid var(--line); color: var(--subtle); }
+.ui-select-search input { width: 100%; border: 0; outline: 0; background: transparent; color: var(--ink); font-size: 13px; font-family: inherit; }
+.ui-select-viewport { max-height: 260px; overflow: auto; padding: 4px; }
+.ui-select-item { position: relative; display: flex; align-items: center; gap: 6px; padding: 6px 8px 6px 24px; border-radius: var(--radius); color: var(--ink); font-size: 13px; outline: 0; cursor: pointer; }
+.ui-select-item[data-highlighted] { background: var(--bg-subtle); }
+.ui-select-item[data-state='checked'] { font-weight: 600; }
+.ui-select-indicator { position: absolute; left: 7px; display: grid; place-items: center; color: var(--ink); }
+.ui-select-hint { margin-left: auto; color: var(--subtle); font-size: 12px; }
+.ui-select-empty { padding: 10px; color: var(--muted); font-size: 13px; text-align: center; }
+/* --- segmented control ---------------------------------------------------- */
+
+.ui-segmented { display: inline-flex; padding: 2px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-subtle); }
+.ui-segmented button { min-width: 60px; height: 26px; padding: 0 10px; border: 0; border-radius: 4px; color: var(--muted); background: transparent; font-size: 12px; transition: background-color .14s ease, color .14s ease, box-shadow .14s ease; }
+.ui-segmented button:hover { color: var(--ink); }
+.ui-segmented button.active { background: var(--bg); color: var(--ink); font-weight: 600; box-shadow: var(--shadow-sm); }
+
+/* --- pagination ----------------------------------------------------------- */
+
+.ui-pagination { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 14px; color: var(--muted); font-size: 12px; }
+.ui-pagination-page { white-space: nowrap; }
+
+/* --- checkbox and radio --------------------------------------------------- */
+/* The control is a real input kept in the accessibility tree; the frame is a
+   sibling element. Focus is shown on the frame via :focus-visible so keyboard
+   users can see where they are, which the previous hidden-input pattern could
+   not do. */
+
+.ui-check { display: flex; align-items: flex-start; gap: 9px; cursor: pointer; }
+.ui-check-disabled { cursor: not-allowed; opacity: .6; }
+.ui-check-box { display: grid; place-items: center; flex: 0 0 16px; width: 16px; height: 16px; margin-top: 1px; padding: 0; border: 1px solid var(--line); border-radius: 4px; background: var(--bg); }
+.ui-check-box[data-state='checked'] { border-color: var(--action); background: var(--action); }
+.ui-check-box:focus-visible { outline: 0; border-color: var(--link); box-shadow: 0 0 0 3px rgba(9, 105, 218, .3); }
+.ui-check-tick { display: grid; place-items: center; color: #fff; }
+.ui-check-text { min-width: 0; }
+.ui-check-text strong, .ui-check-text small { display: block; }
+.ui-check-text strong { color: var(--ink); font-size: 13px; font-weight: 600; }
+.ui-check-text small { margin-top: 3px; color: var(--muted); font-size: 12px; line-height: 1.55; }
+
+.ui-radio-group { display: flex; flex-direction: column; gap: 8px; }
+.ui-radio { display: flex; align-items: flex-start; gap: 10px; padding: 12px; border: 1px solid var(--line); border-radius: var(--radius); cursor: pointer; }
+.ui-radio:hover { background: var(--bg-subtle); }
+.ui-radio[data-state='checked'] { border-color: var(--action); background: var(--bg-subtle); }
+.ui-radio:focus-visible { outline: 0; border-color: var(--link); box-shadow: 0 0 0 3px rgba(9, 105, 218, .3); }
+.ui-radio-dot { position: relative; flex: 0 0 15px; width: 15px; height: 15px; margin-top: 2px; border: 1px solid var(--line); border-radius: 50%; background: var(--bg); }
+.ui-radio[data-state='checked'] .ui-radio-dot { border-color: var(--action); border-width: 4px; }
+.ui-radio-icon { display: grid; place-items: center; color: var(--muted); }
+.ui-radio-text { min-width: 0; }
+.ui-radio-text strong, .ui-radio-text small { display: block; }
+.ui-radio-text strong { color: var(--ink); font-size: 13px; font-weight: 600; }
+.ui-radio-text small { margin-top: 3px; color: var(--muted); font-size: 12px; line-height: 1.55; }
+
+/* --- collapsible ---------------------------------------------------------- */
+
+.ui-disclosure { border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg); overflow: hidden; }
+.ui-disclosure-trigger { display: flex; align-items: center; gap: 10px; width: 100%; padding: 12px 14px; border: 0; background: transparent; color: var(--ink); text-align: left; }
+.ui-disclosure-trigger:hover { background: var(--bg-subtle); }
+.ui-disclosure-trigger > svg { color: var(--subtle); transition: transform .15s; }
+.ui-disclosure-trigger > svg.rotated { transform: rotate(180deg); }
+.ui-disclosure-icon { display: grid; place-items: center; color: var(--subtle); }
+.ui-disclosure-text { flex: 1; min-width: 0; }
+.ui-disclosure-text strong, .ui-disclosure-text small { display: block; }
+.ui-disclosure-text strong { font-size: 13px; font-weight: 600; }
+.ui-disclosure-text small { margin-top: 3px; color: var(--muted); font-size: 12px; }
+.ui-disclosure-content { padding: 0 14px 14px; }
+.ui-disclosure-hint { margin: 0 0 10px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+
+/* --- multi select --------------------------------------------------------- */
+
+.ui-multipicker-trigger { display: inline-flex; align-items: center; gap: 8px; max-width: 320px; min-height: 32px; padding: 0 10px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg); color: var(--ink); font: inherit; font-size: 13px; cursor: pointer; }
+.ui-multipicker-trigger:hover { border-color: var(--subtle); }
+.ui-multipicker-trigger:focus-visible { outline: 0; border-color: var(--link); box-shadow: 0 0 0 3px rgba(9, 105, 218, .3); }
+.ui-multipicker-value { overflow: hidden; color: var(--ink); text-overflow: ellipsis; white-space: nowrap; }
+.ui-multipicker-value.empty { color: var(--muted); }
+.ui-multipicker-count { flex: none; padding: 0 6px; border-radius: 2em; background: var(--bg-subtle); color: var(--muted); font-size: 11px; }
+.ui-multipicker-trigger svg { flex: none; color: var(--subtle); }
+.ui-multipicker-menu { min-width: 220px; max-height: 320px; overflow: auto; }
+.ui-multipicker-item { padding-left: 10px; }
+.ui-multipicker-item-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* The tick box mirrors the shared Checkbox so the two controls agree visually. */
+.ui-multipicker-box { display: grid; place-items: center; flex: 0 0 15px; width: 15px; height: 15px; border: 1px solid var(--line); border-radius: 4px; background: var(--bg); color: #fff; }
+.ui-multipicker-item[data-state='checked'] .ui-multipicker-box { border-color: var(--action); background: var(--action); }

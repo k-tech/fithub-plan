@@ -1,0 +1,1 @@
+../../internal/store/migrations/0001_initial.sql

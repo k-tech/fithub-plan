@@ -1,0 +1,27 @@
+/* Branch and tag listing. One row shape for both, because the reader is doing
+   the same thing in each case: scanning names and dates for the one they want. */
+
+.ref-filter { display: flex; align-items: center; gap: 8px; min-width: 240px; min-height: 34px; padding: 0 10px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg); color: var(--muted); }
+.ref-filter:focus-within { border-color: var(--link); box-shadow: 0 0 0 3px rgba(9, 105, 218, .3); }
+.ref-filter input { width: 100%; border: 0; outline: 0; background: transparent; color: var(--ink); font: inherit; font-size: 13px; }
+
+.ref-panel { overflow: hidden; }
+.ref-row { display: flex; align-items: center; gap: 12px; padding: 12px 18px; border-bottom: 1px solid var(--line); color: var(--ink); text-decoration: none; transition: background .15s; }
+.ref-row:hover { background: var(--bg-subtle); }
+.ref-row:last-of-type { border-bottom: 0; }
+.ref-row-icon { display: grid; place-items: center; flex: 0 0 22px; color: var(--muted); }
+.ref-row-copy { flex: 1; min-width: 0; }
+.ref-row-name { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.ref-row-name strong { overflow: hidden; color: var(--ink); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+.ref-row-subject { display: block; overflow: hidden; margin-top: 3px; color: var(--muted); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+.ref-badge { display: inline-flex; flex: none; align-items: center; gap: 4px; padding: 1px 7px; border: 1px solid var(--line); border-radius: 2em; color: var(--muted); font-size: 11px; }
+.ref-row-meta { display: flex; flex: none; align-items: center; gap: 12px; color: var(--muted); font-size: 12px; }
+.ref-row-meta code { padding: 1px 5px; border-radius: 4px; background: var(--bg-subtle); color: var(--muted); font-size: 11px; }
+.ref-panel-foot { display: flex; align-items: center; gap: 7px; padding: 12px 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+.ref-empty { display: grid; place-items: center; padding: 56px 20px; text-align: center; }
+.ref-empty strong { color: var(--ink); font-size: 14px; }
+.ref-empty p { margin: 8px 0 0; max-width: 420px; color: var(--muted); font-size: 12px; line-height: 1.7; }
+
+@media (max-width: 768px) {
+  .ref-row-meta span { display: none; }
+}

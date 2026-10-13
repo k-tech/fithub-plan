@@ -1,0 +1,40 @@
+/* In-app notifications: the bell in the header and the inbox page */
+.notification-bell { position: relative; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 6px; color: #59636e; transition: color .15s, background .15s; }
+.notification-bell:hover { color: #1f2328; background: #f6f8fa; }
+/* The badge sits on the icon so the unread count is readable without opening
+   the inbox; it never shows a number the inbox would refuse to list. */
+.notification-badge { position: absolute; top: -3px; right: -4px; min-width: 17px; height: 17px; padding: 0 4px; border: 2px solid #ffffff; border-radius: 999px; color: #ffffff; background: #cf222e; font-size: 9px; font-weight: 700; line-height: 13px; text-align: center; }
+
+.notification-panel { padding: 0; overflow: hidden; }
+.notification-filterbar { display: flex; gap: 4px; padding: 14px 16px; border-bottom: 1px solid #f6f8fa; }
+.notification-error { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; padding: 11px 14px; border: 1px solid #ffebe9; border-radius: 6px; color: #cf222e; background: #ffebe9; font-size: 12px; }
+.notification-panel .notification-error { margin: 12px; }
+
+/* An unread row is marked by a left accent rather than only a dot, so the state
+   survives a glance and does not rely on colour alone. */
+.notification-row { display: flex; align-items: flex-start; gap: 13px; padding: 15px 17px; border-bottom: 1px solid #f6f8fa; border-left: 3px solid transparent; }
+.notification-row:last-child { border-bottom: none; }
+.notification-row.unread { border-left-color: #1a7f37; background: #f6f8fa; }
+.notification-icon { display: grid; place-items: center; flex: 0 0 32px; width: 32px; height: 32px; border-radius: 6px; color: #59636e; background: #f6f8fa; }
+.notification-icon.kind-run_failed { color: #cf222e; background: #ffebe9; }
+.notification-icon.kind-pull_merged { color: #5a4a8a; background: #f2eef9; }
+.notification-icon.kind-issue_assigned { color: #9a6700; background: #fff8c5; }
+.notification-copy { flex: 1; min-width: 0; }
+.notification-line { display: flex; align-items: center; gap: 8px; }
+.notification-subject { color: #1f2328; font-size: 13px; line-height: 1.5; }
+.notification-subject:hover { color: #1f2328; }
+.notification-subject span { color: #59636e; }
+.notification-dot { flex: 0 0 7px; width: 7px; height: 7px; border-radius: 50%; background: #1a7f37; }
+.notification-copy small { display: block; margin-top: 5px; color: #6e7781; font-size: 11px; }
+.notification-copy code { padding: 1px 5px; border-radius: 4px; background: #f6f8fa; color: #59636e; font-size: 10px; }
+.notification-mark { flex: 0 0 auto; color: #6e7781; font-size: 11px; }
+.notification-mark:hover { color: #1f2328; }
+.notification-empty { display: grid; place-items: center; padding: 54px 20px; color: #6e7781; text-align: center; }
+.notification-empty h3 { margin: 14px 0 6px; color: #1f2328; font-size: 14px; }
+.notification-empty p { margin: 0; max-width: 420px; color: #6e7781; font-size: 11px; line-height: 1.7; }
+.notification-pagination { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 14px; color: #6e7781; font-size: 11px; }
+
+@media (max-width: 640px) {
+  .notification-mark { display: none; }
+  .notification-row { padding: 13px 14px; }
+}

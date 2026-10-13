@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:15@sha256:5f72c7b5bd616308ccfd2e74d6be16fb06364e5eecbb815fe9dc6ab9761d2111
+    environment:
+      POSTGRES_USER: fithub
+      POSTGRES_PASSWORD: fithub-dev-only
+      POSTGRES_DB: fithub
+    ports:
+      - "127.0.0.1:55439:5432"
+    volumes:
+      - fithub_pg_dev_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fithub -d fithub"]
+      interval: 2s
+      timeout: 2s
+      retries: 20
+
+volumes:
+  fithub_pg_dev_data:

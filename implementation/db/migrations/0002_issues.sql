@@ -1,0 +1,1 @@
+../../internal/store/migrations/0002_issues.sql

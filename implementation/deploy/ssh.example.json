@@ -1,0 +1,6 @@
+{
+  "databaseUrl": "postgres://ssh_gateway:REPLACE_WITH_SECRET@db.internal:5432/fithub?sslmode=verify-full",
+  "gitRoot": "/srv/fithub/repos",
+  "gitBinary": "/usr/bin/git",
+  "sshUser": "git"
+}

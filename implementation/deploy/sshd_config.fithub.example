@@ -1,0 +1,15 @@
+# Example Match block for a dedicated OpenSSH Git login. Append only after
+# reviewing the host's full sshd_config; Match continues until the next block.
+Match User git
+    PubkeyAuthentication yes
+    AuthenticationMethods publickey
+    PasswordAuthentication no
+    KbdInteractiveAuthentication no
+    AuthorizedKeysFile none
+    AuthorizedKeysCommand /usr/local/bin/fithub-ssh authorized-key --config /etc/fithub/ssh.json --user %u --fingerprint %f
+    AuthorizedKeysCommandUser fithub-keylookup
+    DisableForwarding yes
+    PermitTTY no
+    PermitUserRC no
+    PermitUserEnvironment no
+    AcceptEnv GIT_PROTOCOL

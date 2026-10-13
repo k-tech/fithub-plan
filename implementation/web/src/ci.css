@@ -1,0 +1,90 @@
+/* Automated checks: run list, run detail, log viewer, and PR check status */
+
+
+.ci-error { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; padding: 11px 14px; border: 1px solid #ffebe9; border-radius: 6px; color: #cf222e; background: #ffebe9; font-size: 12px; }
+.ci-success { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; padding: 11px 14px; border: 1px solid #d1d9e0; border-radius: 6px; color: #0969da; background: #f6f8fa; font-size: 12px; }
+.ci-warning { display: flex; align-items: flex-start; gap: 7px; margin: 12px 0 0; padding: 9px 12px; border-radius: 6px; color: #9a6700; background: #fdf9ee; font-size: 11px; line-height: 1.6; }
+.ci-warning svg { flex: 0 0 auto; margin-top: 1px; }
+
+/* The merge panel's icon must not read as "ready" while a gate is unsatisfied. */
+.pull-merge-symbol.blocked { color: #a8731f; background: #fdf5e6; }
+
+/* Run state is the single most important signal, so it reads as a labelled pill
+   rather than a bare icon: a failed check and a broken runner must be told apart. */
+.ci-state { display: inline-flex; align-items: center; gap: 5px; min-width: 78px; padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+.ci-state-compact { min-width: 0; padding: 3px 8px; font-size: 10px; }
+.ci-state-succeeded { color: #1a7f37; background: #dafbe1; }
+.ci-state-failed { color: #cf222e; background: #ffebe9; }
+.ci-state-running { color: #9a6700; background: #fff8c5; }
+.ci-state-queued { color: #59636e; background: #f6f8fa; }
+.ci-state-cancelled { color: #59636e; background: #f6f8fa; }
+.ci-state-timed_out { color: #9a6700; background: #fff8c5; }
+.ci-state-infrastructure_failed { color: #7b4a86; background: #f5ecf8; }
+.ci-spin { animation: ci-rotate 1.1s linear infinite; }
+@keyframes ci-rotate { to { transform: rotate(360deg); } }
+
+.ci-runs-panel { padding: 0; overflow: hidden; }
+.ci-filterbar { display: flex; gap: 4px; padding: 14px 16px; border-bottom: 1px solid #f6f8fa; }
+.ci-run-row { display: flex; align-items: center; gap: 14px; padding: 14px 17px; border-bottom: 1px solid #f6f8fa; transition: background .15s; }
+.ci-run-row:last-child { border-bottom: none; }
+.ci-run-row:hover { background: #f6f8fa; }
+.ci-run-copy { flex: 1; min-width: 0; }
+.ci-run-copy strong { display: block; color: #1f2328; font-size: 13px; }
+.ci-run-number { margin-left: 7px; color: #6e7781; font-size: 11px; font-weight: 500; }
+.ci-run-copy small { display: block; margin-top: 4px; color: #6e7781; font-size: 11px; }
+.ci-run-copy code { padding: 1px 5px; border-radius: 4px; background: #f6f8fa; color: #59636e; font-size: 10px; }
+.ci-run-duration { color: #6e7781; font-size: 11px; white-space: nowrap; }
+.ci-empty { display: grid; place-items: center; padding: 54px 20px; color: #6e7781; text-align: center; }
+.ci-empty h3 { margin: 14px 0 6px; color: #1f2328; font-size: 14px; }
+.ci-empty p { margin: 0; max-width: 380px; color: #6e7781; font-size: 11px; line-height: 1.7; }
+.ci-pagination { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 14px; color: #6e7781; font-size: 11px; }
+
+.ci-back { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 14px; color: #59636e; font-size: 11px; }
+.ci-back:hover { color: #1f2328; }
+
+/* .panel carries the frame only, so a panel whose children are not themselves
+   padded has to bring its own inset — otherwise the content touches the border.
+   This one has raw headings and paragraphs, hence the padding here. */
+.ci-summary { margin-bottom: 16px; padding: 20px 22px; }
+.ci-summary-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.ci-summary-head h2 { margin: 0 0 10px; color: #1f2328; font-size: 17px; }
+.ci-summary-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; color: #6e7781; font-size: 11px; }
+.ci-summary-meta code { padding: 1px 5px; border-radius: 4px; background: #f6f8fa; color: #59636e; font-size: 10px; }
+.ci-summary-actions { display: flex; gap: 8px; }
+.ci-dot { width: 3px; height: 3px; border-radius: 50%; background: #6e7781; }
+.ci-conclusion { display: flex; align-items: flex-start; gap: 7px; margin: 14px 0 0; color: #59636e; font-size: 11px; line-height: 1.6; }
+.ci-conclusion svg { flex: 0 0 auto; margin-top: 1px; }
+
+/* Same as .ci-summary: the frame comes from .panel, so this panel has to bring
+   its own inset or the section heading touches the border. */
+.ci-jobs { margin-bottom: 16px; padding: 18px 20px 8px; }
+.ci-jobs-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.ci-jobs-head h3 { margin: 0; color: #1f2328; font-size: 14px; }
+.ci-jobs-head span { color: #6e7781; font-size: 11px; }
+.ci-jobs-empty { margin: 0; padding-bottom: 10px; color: #6e7781; font-size: 11px; }
+/* A job row is a button because selecting it swaps the log below. */
+.ci-job-row { display: flex; align-items: center; gap: 13px; width: 100%; padding: 12px 14px; border: 1px solid transparent; border-radius: 6px; background: transparent; text-align: left; transition: background .15s, border-color .15s; }
+.ci-job-row:hover { background: #f6f8fa; }
+.ci-job-row.active { border-color: #d1d9e0; background: #f6f8fa; }
+.ci-job-copy { flex: 1; min-width: 0; }
+.ci-job-copy strong { display: block; color: #1f2328; font-size: 12px; }
+.ci-job-copy small { display: block; margin-top: 3px; color: #6e7781; font-size: 10px; }
+.ci-job-copy code { padding: 0 4px; border-radius: 4px; background: #f6f8fa; color: #59636e; font-size: 10px; }
+.ci-job-time { color: #6e7781; font-size: 10px; white-space: nowrap; }
+
+.ci-log { overflow: hidden; border: 1px solid #59636e; border-radius: 6px; background: #59636e; }
+.ci-log-head { display: flex; align-items: center; gap: 8px; padding: 11px 15px; border-bottom: 1px solid #59636e; color: #6e7781; font-size: 11px; }
+.ci-log-following { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; color: #6e7781; font-size: 10px; }
+.ci-pulse { width: 6px; height: 6px; border-radius: 50%; background: #6e7781; animation: ci-pulse 1.6s ease-in-out infinite; }
+@keyframes ci-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .3; } }
+/* Monospaced pre with its own scroll keeps a hostile long line from breaking the
+   page layout; the log is untrusted repository output. */
+.ci-log-body { max-height: 460px; margin: 0; padding: 15px; overflow: auto; color: #d1d9e0; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; line-height: 1.75; white-space: pre-wrap; word-break: break-word; }
+.ci-log .ci-error { margin: 12px; }
+
+
+@media (max-width: 720px) {
+  .ci-summary-head { flex-direction: column; }
+  .ci-run-duration { display: none; }
+  .ci-log-body { max-height: 320px; }
+}

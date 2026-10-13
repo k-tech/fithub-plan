@@ -3,9 +3,9 @@
 .issue-toolbar p { margin: 6px 0 0; color: #6e7781; font-size: 11px; }
 .issue-list-panel { margin-bottom: 30px; }
 .issue-filterbar { display: flex; gap: 5px; padding: 13px 17px; border-bottom: 1px solid #d1d9e0; }
-.issue-row { display: flex; align-items: center; gap: 13px; padding: 16px 20px; border-bottom: 1px solid #f6f8fa; }
+.issue-row { display: flex; align-items: center; gap: 13px; padding: 16px 20px; border-bottom: 1px solid #f6f8fa; transition: background .15s; }
 .issue-row:last-child { border-bottom: 0; }
-.issue-row:hover { background: #ffffff; }
+.issue-row:hover { background: var(--bg-subtle); }
 .issue-row-symbol { flex: 0 0 20px; color: #1a7f37; }
 .issue-row-symbol.closed { color: #8250df; }
 .issue-row-copy { display: block; min-width: 0; flex: 1; }

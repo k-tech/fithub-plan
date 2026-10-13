@@ -1,7 +1,7 @@
 .commit-list-panel { margin-bottom: 30px; }
-.commit-row { display: flex; align-items: center; gap: 13px; padding: 15px 19px; border-bottom: 1px solid #f6f8fa; }
+.commit-row { display: flex; align-items: center; gap: 13px; padding: 15px 19px; border-bottom: 1px solid #f6f8fa; transition: background .15s; }
 .commit-row:last-child { border-bottom: 0; }
-.commit-row:hover { background: #ffffff; }
+.commit-row:hover { background: var(--bg-subtle); }
 .commit-row-icon { display: grid; place-items: center; flex: 0 0 31px; width: 31px; height: 31px; border-radius: 6px; color: #59636e; background: #f6f8fa; }
 .commit-row-copy { min-width: 0; flex: 1; }
 .commit-row-copy strong { display: block; overflow: hidden; color: #1f2328; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }

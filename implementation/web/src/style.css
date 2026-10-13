@@ -7,7 +7,11 @@
    closed/failed, amber for pending — plus a blue link. There is no brand hue;
    a coloured chrome would be the one thing that made this look like neither. */
 :root {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "Helvetica Neue", Arial, sans-serif;
+  /* DM Sans is loaded via index.html but was not in the stack, so the page was
+     silently falling back to the system UI font. Move it to the front and keep
+     Noto Sans SC for CJK; on browsers that have no DM Sans, the existing
+     system stack takes over unchanged. */
+  font-family: "DM Sans", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   color: #1f2328;
   background: #ffffff;
   font-synthesis: none;

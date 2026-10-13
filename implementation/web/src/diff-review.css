@@ -3,7 +3,7 @@
 .diff-block { border-bottom: 1px solid #f6f8fa; }
 .diff-block:last-child { border-bottom: none; }
 .diff-line { display: flex; align-items: stretch; gap: 0; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; line-height: 1.65; }
-.diff-line:hover { background: #ffffff; }
+.diff-line:hover { background: var(--bg-subtle); }
 .diff-number { flex: 0 0 44px; padding: 0 8px; color: #6e7781; text-align: right; user-select: none; background: #ffffff; border-right: 1px solid #f6f8fa; }
 .diff-marker { flex: 0 0 16px; color: #6e7781; text-align: center; user-select: none; }
 .diff-text { flex: 1 1 auto; padding-right: 10px; color: #59636e; white-space: pre-wrap; word-break: break-word; }

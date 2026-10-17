@@ -22,7 +22,10 @@
 .notification-copy { flex: 1; min-width: 0; }
 .notification-line { display: flex; align-items: center; gap: 8px; }
 .notification-subject { color: #1f2328; font-size: 13px; line-height: 1.5; }
-.notification-subject:hover { color: #1f2328; }
+/* The base colour was already #1f2328, so the old `:hover { color: #1f2328; }`
+   was a no-op visually and gave keyboard users no visible state at all. Match
+   the convention `.subtle-link` uses in style.css: underline on focus. */
+.notification-subject:focus-visible { text-decoration: underline; outline: 0; }
 .notification-subject span { color: #59636e; }
 .notification-dot { flex: 0 0 7px; width: 7px; height: 7px; border-radius: 50%; background: #1a7f37; }
 .notification-copy small { display: block; margin-top: 5px; color: #6e7781; font-size: 11px; }

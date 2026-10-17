@@ -26,7 +26,7 @@
 .repo-tabbar { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; border-bottom: 1px solid var(--line); overflow-x: auto; }
 .repo-tab { display: inline-flex; align-items: center; gap: 6px; padding: 8px 8px 10px; border-bottom: 2px solid transparent; color: var(--ink); font-size: 14px; line-height: 20px; white-space: nowrap; transition: border-color .15s ease, color .15s ease; }
 .repo-tab:hover { border-bottom-color: var(--line-muted); }
-.repo-tab.active { border-bottom-color: #fd8c73; font-weight: 600; }
+.repo-tab.active { border-bottom-color: var(--ink); font-weight: 600; }
 .repo-tab svg { color: var(--subtle); flex: 0 0 auto; }
 
 /* The branch picker sits in the code tab's toolbar. It had no rule at all, so
@@ -36,14 +36,16 @@
 
 /* Switching tabs swaps the body. A very short fade keeps the change from
    snapping, and because each tab is its own route the animation replays on every
-   switch. Kept under 150ms so a fast clicker never sees a half-drawn page. */
-.repo-body { animation: repo-body-in .14s ease-out; }
+   switch. Kept under 150ms so a fast clicker never sees a half-drawn page.
+   `min-width: 0` is needed so the inner flex panels can shrink past their
+   content's intrinsic width; without it the wide code views force a horizontal
+   scroll on their parent. */
+.repo-body { min-width: 0; animation: repo-body-in .14s ease-out; }
 
 /* The toolbar is where a section's own controls go: branch picker, search,
    primary action. It sits below the tabs so it never competes with the title. */
 .repo-toolbar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
 .repo-toolbar-spacer { flex: 1; }
-.repo-body { min-width: 0; }
 
 
 

@@ -20,7 +20,12 @@
 .ssh-key-row strong { color: #59636e; font-size: 11px; }
 .ssh-key-row small { margin-top: 4px; color: #6e7781; font-size: 10px; }
 .ssh-key-delete { border: 0; color: #cf222e; background: transparent; cursor: pointer; }
-.ssh-key-delete:hover { color: #cf222e; }
+/* `.ssh-key-delete:hover { color: #cf222e }` was a no-op (already the resting
+   colour) and there was no `:focus-visible` at all, so keyboard users had no
+   visible affordance. Give it a working hover — same shape and colour family
+   as `.collab-remove` in collaborators.css — and apply the same state on
+   `:focus-visible` so the keyboard affordance matches the pointer one. */
+.ssh-key-delete:hover, .ssh-key-delete:focus-visible { color: #cf222e; background: #fff0ee; border-radius: 6px; outline: 0; }
 .ssh-key-actions { display: flex; gap: 5px; }
 .ssh-key-error { display: flex; align-items: center; gap: 7px; padding: 10px; border-radius: 6px; color: #cf222e; background: #ffebe9; font-size: 11px; }
 .ssh-key-empty { display: grid; justify-items: center; gap: 8px; padding: 45px 12px; color: #6e7781; font-size: 11px; text-align: center; }

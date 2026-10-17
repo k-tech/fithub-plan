@@ -126,7 +126,10 @@ a { color: inherit; text-decoration: none; }
   }
 }
 .text-button { padding: 3px 0; border: 0; background: none; color: #1f883d; font-size: 11px; font-weight: 700; white-space: nowrap; }
-.text-button:hover { text-decoration: underline; }
+/* Buttons render as <button> so keyboard users reach them by Tab. The default
+   focus ring is suppressed and replaced with the same underline the hover
+   gives, keeping the focus affordance consistent with the rest of the app. */
+.text-button:hover, .text-button:focus-visible { text-decoration: underline; outline: 0; }
 .error-message, .success-message, .info-box { display: flex; align-items: flex-start; gap: 9px; padding: 11px 13px; border-radius: 6px; font-size: 11px; line-height: 1.55; }
 .error-message { color: #cf222e; background: #ffebe9; border: 1px solid #ffebe9; }
 .success-message { color: #1a7f37; background: #f6f8fa; border: 1px solid #d1d9e0; }

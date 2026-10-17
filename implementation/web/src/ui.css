@@ -25,7 +25,9 @@
 .ui-dialog-body:empty { display: none; }
 .ui-dialog-footer { display: flex; justify-content: flex-end; gap: 8px; padding: 0 16px 16px; }
 .ui-dialog-close { position: absolute; top: 12px; right: 12px; display: grid; place-items: center; width: 28px; height: 28px; border: 0; border-radius: var(--radius); color: var(--muted); background: transparent; }
-.ui-dialog-close:hover { background: var(--bg-subtle); color: var(--ink); }
+/* Dialog close is a Radix button — hover-only meant keyboard users had no
+   visible focus state. Match the same shape and tokens on `:focus-visible`. */
+.ui-dialog-close:hover, .ui-dialog-close:focus-visible { background: var(--bg-subtle); color: var(--ink); outline: 0; }
 
 @keyframes ui-fade-in { from { opacity: 0 } to { opacity: 1 } }
 @keyframes ui-fade-out { from { opacity: 1 } to { opacity: 0 } }
@@ -137,7 +139,9 @@
 
 .ui-disclosure { border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg); overflow: hidden; }
 .ui-disclosure-trigger { display: flex; align-items: center; gap: 10px; width: 100%; padding: 12px 14px; border: 0; background: transparent; color: var(--ink); text-align: left; }
-.ui-disclosure-trigger:hover { background: var(--bg-subtle); }
+/* Disclosure is a button. The hover lift had no focus counterpart, so Tab
+   navigation gave no visible state. Apply the same surface tint on focus. */
+.ui-disclosure-trigger:hover, .ui-disclosure-trigger:focus-visible { background: var(--bg-subtle); outline: 0; }
 .ui-disclosure-trigger > svg { color: var(--subtle); transition: transform .15s; }
 .ui-disclosure-trigger > svg.rotated { transform: rotate(180deg); }
 .ui-disclosure-icon { display: grid; place-items: center; color: var(--subtle); }
